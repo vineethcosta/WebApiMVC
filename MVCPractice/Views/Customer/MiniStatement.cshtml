@@ -1,0 +1,112 @@
+﻿@model  IEnumerable<BusinessLayer.Transaction>
+
+@{
+    ViewBag.Title = "MiniStatement";
+}
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+
+
+<div class="jumbotron d-inline-block" style=" margin-top: 100px">
+    <label id="message"></label>
+    @using (Html.BeginForm())
+    {
+        <div class="input-group mb-3">
+            <label id="Label2" class="input-group-text input-group-prepend">From Date:</label>
+            @Html.TextBox("fromDate", "", new { @class = "date-picker" })
+            &nbsp;
+            <label id="Label3" class="input-group-text input-group-prepend">To Date:</label>
+            @Html.TextBox("toDate", "", new { @class = "date-picker" })
+            &nbsp;
+            <input type="submit" class="btn btn-outline-success" value="Submit" />
+        </div>
+        <div>
+            <label id="message">@ViewBag.message</label>
+        </div>
+
+
+    }
+
+    @if (Model != null)
+    {
+        <div class="table-responsive">
+            <div>
+
+                <table border="2" style="font-family:Arial" class="table table-hover table-striped">
+                    <tr>
+                        <th>TransactionId</th>
+                        <th>Source Account</th>
+                        <th>Destination Account</th>
+                        <th>Transaction Date</th>
+                        <th>Amount</th>
+                        <th>Transaction Type</th>
+                        <th>Comment</th>
+                    </tr>
+                    @foreach (BusinessLayer.Transaction transaction in @Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @transaction.transactionId
+                            </td>
+                            <td>
+                                @if (transaction.transactionType == "FundTransfer" || transaction.transactionType == "withdraw")
+                                {
+                                    @transaction.fromAccountNo
+                                }
+                                else
+                                {
+                                    <em>  - </em>
+                                }
+
+                            </td>
+                            <td>
+                                @if (transaction.transactionType == "FundTransfer" || transaction.transactionType == "deposit")
+                                {
+                                    @transaction.toAccountNo
+                                }
+                                else
+                                {
+                                    <em>  - </em>
+                                }
+                            </td>
+                            <td>
+                                @transaction.transactionDate
+                            </td>
+                            @if (long.Parse(Session["accountNumber"].ToString()) != @transaction.fromAccountNo || transaction.transactionType == "deposit")
+                            {
+                                <td style="color: green">
+                                    @transaction.amount
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="color:red">
+                                    @transaction.amount
+                                </td>
+                            }
+                            <td>
+                                @transaction.transactionType
+                            </td>
+                            <td>
+                                @transaction.comments
+                            </td>
+                        </tr>
+
+
+
+                    }
+
+                </table>
+                <br />
+
+            </div>
+
+
+        </div>
+    }
+</div>

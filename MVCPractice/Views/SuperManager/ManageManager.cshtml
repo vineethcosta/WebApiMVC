@@ -1,0 +1,76 @@
+﻿@model  MVCPractice.Models.userDetailViewModel
+@{
+    ViewBag.Title = "ManageManager";
+}
+
+<div class="jumbotron bg-light text-dark">
+    <div>
+        
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label id="Label1" class="col-form-label">Enter Manager Id </label>
+            <input type="text" class="form-control" name="managerId" id="managerId" />
+            @*@Html.EditorFor(model => model.managerId)*@
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
+        </div>
+        <label> @ViewBag.NotFoundManager</label>
+        <label id="Label2"></label>
+        <div class="table-responsive" style="border:0;">
+            @if (@Model != null)
+            {
+                <table border="1" style="font-family:Arial" class="table table-hover table-striped">
+                    <tr>
+                        <th>ManagerId</th>
+                        <th>ManagerName</th>
+                        <th>Address</th>
+                        <th>PhoneNo</th>
+                        <th>Email Id</th>
+                        <th>Branch Id</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.userId
+                        </td>
+                        <td>
+                            @Model.userName
+                        </td>
+                        <td>
+                            @Model.address
+                        </td>
+                        <td>
+                            @Model.phoneNumber
+                        </td>
+                        <td>
+                            @Model.emailId
+                        </td>
+                        <td>
+                            @Model.branchId
+                        </td>
+                    </tr>
+                </table>
+            }
+
+        </div>
+    }
+    <div class="btn btn-group">
+        <label id="message"></label>
+        <div class="btn btn-group">
+            @if (@Model == null)
+            {
+                <button id="showAllManagersBtn" onclick="location.href='@Url.Action("ManagersList","SuperManager")'" class="btn btn-outline-info">Show all</button>
+                <button id="add" onclick="location.href='@Url.Action("AddManager","SuperManager")'" class="btn btn-outline-success">Add</button>
+            }
+            else
+            {
+                <button id="edit" onclick="location.href='@Url.Action("EditManager", "SuperManager", new  { id= @ViewBag.mgrId} )'" class="btn btn-outline-dark">Edit</button>
+                <button id="delete" onclick="location.href='@Url.Action("DeleteManager", "SuperManager", new { id = @ViewBag.mgrId })'" class="btn btn-outline-danger">Delete</button>
+            }
+
+        </div>
+    </div>
+
+</div>

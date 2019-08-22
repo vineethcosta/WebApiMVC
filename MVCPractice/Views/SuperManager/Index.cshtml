@@ -1,0 +1,54 @@
+﻿
+@model  IEnumerable<MVCPractice.Models.userDetailViewModel>
+
+@*@model BusinessLayer.Manager*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="jumbotron d-inline-block" style=" margin-top: 100px">
+        <h2>Managers List</h2>
+        <label id="message"></label>
+        <div class="table-responsive">
+            <div>
+
+                <table border="1" style="font-family:Arial" class="table table-hover table-striped">
+                    <tr>
+                   
+                        <th>Manager Id</th>
+                        <th>Manager Name</th>
+                        <th>Branch Id</th>
+                    </tr>
+
+                    @foreach (MVCPractice.Models.userDetailViewModel manager in @Model)
+                    {
+                        <tr>
+          
+                            <td>
+                                @manager.userId
+                            </td>
+                            <td>
+                                @manager.userName
+
+                            </td>
+                            <td>
+                                @manager.branchId
+                            </td>
+                        </tr>
+
+                    }
+
+                </table>
+                <br />
+
+            </div>
+
+
+        </div>
+
+    </div>
+}

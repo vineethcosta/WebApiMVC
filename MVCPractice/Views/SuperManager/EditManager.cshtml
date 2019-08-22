@@ -1,0 +1,136 @@
+﻿@model MVCPractice.Models.userDetailViewModel
+@{
+    ViewBag.Title = "EditManager";
+}
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+@using (Html.BeginForm())
+{
+    
+    <div class="jumbotron bg-light text-dark">
+        <div>
+            <h1><label id="Label1">Edit Manager</label></h1>
+            @*<h3><label id="Label">Manager Id = @ViewBag.mgrId</label></h3>*@
+        </div>
+
+
+        <table>
+            <tr>
+                <td>
+                    <label id="Label2" class="col-form-label">Manager Name</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="name" id="name" value="@Model.userName" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label id="gender" class="col-form-label">Gender</label>
+                </td>
+                <td>
+                    Male
+                    @Html.RadioButtonFor(model => model.gender, "M")
+                    Female
+                    @Html.RadioButtonFor(model => model.gender, "F")
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <asp:label id="dobLabel" class="col-form-label">Date Of birth</asp:label>
+                </td>
+                <td>
+                    @Html.TextBox("dateOfBirth", "", new { @class = "date-picker" })
+                </td>
+
+            </tr>
+
+          
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">Address</label>
+                </td>
+                <td>
+                    <input type="text" name="address" id="address" class="form-control" value="@Model.address" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">State</label>
+                </td>
+                <td>
+                    <input type="text" name="state" id="state" class="form-control" value="@Model.state" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">City</label>
+                </td>
+                <td>
+                    <input type="text" name="city" id="city" class="form-control" value="@Model.city" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">PinCode</label>
+                </td>
+                <td>
+                    <input type="text" name="pinCode" id="pinCode" class="form-control" value="@Model.pincode" />
+                </td>
+
+            </tr>
+           
+            <tr>
+                <td><label id="Label4" class="col-form-label">Branch Id</label></td>
+               
+                <td>
+                    <select class="form-control" name="branch" id="branch">
+                        @foreach (MVCPractice.Models.branchDetailViewModel branch in @ViewBag.branchList)
+                        {
+                            <option value="@branch.branchId">@branch.branchId</option>
+                        }
+                        <option value="@Model.branchId">@Model.branchId</option>
+                    </select>
+                </td>
+               
+            </tr>
+            <tr>
+                <td>
+                    <label id="Label4" class="col-form-label">Phone Number</label>
+                <td>
+                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" value="@Model.phoneNumber" />
+                </td>
+
+            </tr>
+          
+
+            <tr>
+                <td>
+                    <input type="submit" class="btn btn-outline-success" value="Edit Details" />
+                </td>
+            </tr>
+               
+            <tr>
+                <td>
+                    <label id="Label6"></label>
+                </td>
+                <td>
+                    @ViewBag.result1
+                </td>
+            </tr>
+
+           
+           </table>
+
+</div>
+}
+

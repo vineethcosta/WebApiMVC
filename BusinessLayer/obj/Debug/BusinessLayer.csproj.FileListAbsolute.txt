@@ -1,0 +1,58 @@
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\BusinessLayer.dll
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\BusinessLayer.pdb
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\obj\Debug\BusinessLayer.dll
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\obj\Debug\BusinessLayer.pdb
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\EntityFramework.dll
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\EntityFramework.xml
+c:\users\ya185024\documents\visual studio 2013\Projects\MVCPractice\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\YA185024\Documents\Visual Studio 2013\Projects\MVCPractice\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\YA185024\Desktop\BankMVC\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\vp185149\Desktop\BankMVC-master\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\sy185090\Documents\BankMVC\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\IC185054\Desktop\FinalBankMVC\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\sy185090\Desktop\BankWOS\BusinessLayer\obj\Debug\BusinessLayer.pdb

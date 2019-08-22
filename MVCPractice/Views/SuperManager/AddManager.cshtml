@@ -1,0 +1,137 @@
+﻿@model IEnumerable<MVCPractice.Models.branchDetailViewModel>
+
+@{
+    ViewBag.Title = "AddManager";
+}
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+@using (Html.BeginForm())
+{
+
+    <div class="jumbotron bg-light text-dark">
+        <div>
+            <h1><label id="Label1">Add Manager</label></h1>
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <label id="Label2" class="col-form-label">Manager Name</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="name" id="name" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="genderLabel" class="col-form-label">Gender</label>
+                </td>
+                <td>
+                    Male
+                    @Html.RadioButton("gender", "M")
+                    Female
+                    @Html.RadioButton("gender", "F")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:label id="dobLabel" class="col-form-label">Date Of birth</asp:label>
+                </td>
+                <td>
+                    @Html.TextBox("dateOfBirth", "", new { @class = "date-picker" })
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">Address</label>
+                </td>
+                <td>
+                    <input type="text" name="address" id="address" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">State</label>
+                </td>
+                <td>
+                    <input type="text" name="state" id="state" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">City</label>
+                </td>
+                <td>
+                    <input type="text" name="city" id="city" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="addressLabel" class="col-form-label">PinCode</label>
+                </td>
+                <td>
+                    <input type="text" name="pinCode" id="pinCode" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="Label4" class="col-form-label">Branch Id</label>
+                </td>
+                <td>
+                    <select class="form-control" name="branch" id="branch">
+                        @foreach (MVCPractice.Models.branchDetailViewModel branch in Model)
+                        {
+                            <option value="@branch.branchId">@branch.branchId</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label id="Label4" class="col-form-label">Phone Number</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label id="Label4" class="col-form-label">Email Id</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="mail" id="mail" />
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <input type="submit" class="btn btn-outline-success" value="Add Manager" />
+                </td>
+                <td>
+                    <button id="back" onclick="location.href='@Url.Action("ManageManager", "SuperManager")'" class="btn btn-outline-success">Back</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="Label6"></label>
+                </td>
+                <td>
+                    @ViewBag.result
+ 
+           </td>
+       </tr>
+
+    </table>
+    </div>
+}
+
+
+

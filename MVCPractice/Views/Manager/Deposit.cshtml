@@ -1,0 +1,32 @@
+﻿@model BusinessLayer.Account
+
+@{
+    ViewBag.Title = "Deposit";
+}
+
+    @using (Html.BeginForm())
+{
+    <div class="jumbotron bg-light text-dark">
+        <div>
+            <h1><label id="Label1">Deposit</label></h1>
+        </div>
+        <div class="form-group">
+            <label id="Label2" class="col-form-label">Source Account No</label>
+            <input type="text" id="acc" name="acc" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label id="Label4" class="col-form-label">Amount</label>
+            <input type="text" id="amt" name="amt" class="form-control" />
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-outline-success" value="Transfer" />
+        </div>
+        <label id="Label6"></label>
+        <div>
+            @ViewBag.result
+        </div>
+
+    </div>
+}

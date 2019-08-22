@@ -1,0 +1,41 @@
+﻿@model  IEnumerable<BusinessLayer.Account>
+@{
+    ViewBag.Title = "AccountsList";
+}
+
+
+@using (Html.BeginForm("editAccount", "Manager"))
+{
+    <div class="jumbotron bg-light text-dark" style=" margin-top: 100px">
+        <table border="2" id="Table" style="font-family:Arial" class="table table-hover table-striped">
+            <tr>
+                <th> </th>
+                <th>AccountNumber</th>
+                <th>AccountType</th>
+                <th>Status</th>
+            </tr>
+            @foreach (BusinessLayer.Account accounts in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButton("selectedAccount", accounts.accountNo)
+                    </td>
+                    <td>    
+                        @accounts.accountNo
+                    </td>
+                    <td>
+                        @accounts.accountType
+                    </td>
+                    <td>
+                        @accounts.status
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="btn-group">
+            <input type="submit" value="Edit" id="EditButton" class="btn btn-outline-secondary" />
+        </div>
+        <input value="Add" id="AddButton" onclick="location.href='@Url.Action("addAccount", "Manager")'" class="btn btn-outline-success" />
+        <label id="Label3"></label>
+    </div>
+}

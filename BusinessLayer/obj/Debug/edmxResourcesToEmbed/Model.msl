@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankModelStoreContainer" CdmEntityContainer="BankEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="BankModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="accountNo" ColumnName="accountNo" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="accountType" ColumnName="accountType" />
+          <ScalarProperty Name="DateOfOpen" ColumnName="DateOfOpen" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="dateOfEdited" ColumnName="dateOfEdited" />
+          <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="BankModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="editedDate" ColumnName="editedDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logins">
+      <EntityTypeMapping TypeName="BankModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="BankModel.Transaction">
+        <MappingFragment StoreEntitySet="Transaction">
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="fromAccountNo" ColumnName="fromAccountNo" />
+          <ScalarProperty Name="toAccountNo" ColumnName="toAccountNo" />
+          <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="addCustomer" FunctionName="BankModel.Store.addCustomer" />
+    <FunctionImportMapping FunctionImportName="addDetails" FunctionName="BankModel.Store.addDetails" />
+    <FunctionImportMapping FunctionImportName="addLogin" FunctionName="BankModel.Store.addLogin" />
+    <FunctionImportMapping FunctionImportName="balanceEnq" FunctionName="BankModel.Store.balanceEnq" />
+    <FunctionImportMapping FunctionImportName="changePass" FunctionName="BankModel.Store.changePass" />
+    <FunctionImportMapping FunctionImportName="checkAcc" FunctionName="BankModel.Store.checkAcc" />
+    <FunctionImportMapping FunctionImportName="checkAmo" FunctionName="BankModel.Store.checkAmo" />
+    <FunctionImportMapping FunctionImportName="checkCre" FunctionName="BankModel.Store.checkCre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.checkCre_Result">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="checkCust" FunctionName="BankModel.Store.checkCust" />
+    <FunctionImportMapping FunctionImportName="datecheck" FunctionName="BankModel.Store.datecheck">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.datecheck_Result">
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="fromAccountNo" ColumnName="fromAccountNo" />
+          <ScalarProperty Name="toAccountNo" ColumnName="toAccountNo" />
+          <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="deleteCustomer" FunctionName="BankModel.Store.deleteCustomer" />
+    <FunctionImportMapping FunctionImportName="deleteDetails" FunctionName="BankModel.Store.deleteDetails" />
+    <FunctionImportMapping FunctionImportName="deposit" FunctionName="BankModel.Store.deposit" />
+    <FunctionImportMapping FunctionImportName="editedDetails" FunctionName="BankModel.Store.editedDetails" />
+    <FunctionImportMapping FunctionImportName="getAllCustomers" FunctionName="BankModel.Store.getAllCustomers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.getAllCustomers_Result">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="editedDate" ColumnName="editedDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getCustomerName" FunctionName="BankModel.Store.getCustomerName" />
+    <FunctionImportMapping FunctionImportName="getSpecificCustomer" FunctionName="BankModel.Store.getSpecificCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.getSpecificCustomer_Result">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="editedDate" ColumnName="editedDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="insTrans" FunctionName="BankModel.Store.insTrans" />
+    <FunctionImportMapping FunctionImportName="ministategen" FunctionName="BankModel.Store.ministategen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.ministategen_Result">
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="fromAccountNo" ColumnName="fromAccountNo" />
+          <ScalarProperty Name="toAccountNo" ColumnName="toAccountNo" />
+          <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prints" FunctionName="BankModel.Store.prints">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.prints_Result">
+          <ScalarProperty Name="accountNo" ColumnName="accountNo" />
+          <ScalarProperty Name="accountType" ColumnName="accountType" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="transferAdd" FunctionName="BankModel.Store.transferAdd" />
+    <FunctionImportMapping FunctionImportName="transferSub" FunctionName="BankModel.Store.transferSub" />
+    <FunctionImportMapping FunctionImportName="updateCustomer" FunctionName="BankModel.Store.updateCustomer" />
+    <FunctionImportMapping FunctionImportName="updatePass" FunctionName="BankModel.Store.updatePass" />
+    <FunctionImportMapping FunctionImportName="updateUserID" FunctionName="BankModel.Store.updateUserID" />
+    <FunctionImportMapping FunctionImportName="withdraw" FunctionName="BankModel.Store.withdraw" />
+  </EntityContainerMapping>
+</Mapping>

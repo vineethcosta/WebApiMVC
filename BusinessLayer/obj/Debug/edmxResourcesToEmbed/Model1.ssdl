@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="accountNo" />
+    </Key>
+    <Property Name="accountNo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerId" Type="int" Nullable="false" />
+    <Property Name="accountType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="DateOfOpen" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="dateOfEdited" Type="varchar" MaxLength="15" />
+    <Property Name="ClosingDate" Type="varchar" MaxLength="15" />
+    <Property Name="amount" Type="int" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="branchId" />
+    </Key>
+    <Property Name="branchName" Type="varchar" MaxLength="50" />
+    <Property Name="branchId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="assigned" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="dob" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="state" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="pincode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="phoneNo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="createdDate" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="editedDate" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="userId" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="branchId" Type="varchar" MaxLength="50" />
+    <Property Name="managerId" Type="int" />
+  </EntityType>
+  <EntityType Name="CustomerMedal">
+    <Key>
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="min" Type="int" />
+    <Property Name="max" Type="int" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="role" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="managerId" />
+    </Key>
+    <Property Name="managerName" Type="varchar" MaxLength="50" />
+    <Property Name="branchId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="50" />
+    <Property Name="phoneNo" Type="varchar" MaxLength="50" />
+    <Property Name="userId" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="transactionId" />
+    </Key>
+    <Property Name="transactionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fromAccountNo" Type="bigint" Nullable="false" />
+    <Property Name="toAccountNo" Type="bigint" Nullable="false" />
+    <Property Name="transactionDate" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="transactionType" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="comments" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Account_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_CustomerMedal">
+    <End Role="CustomerMedal" Type="Self.CustomerMedal" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerMedal">
+        <PropertyRef Name="type" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Customer">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="branchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Manager">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="managerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchId" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="branchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountNo" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="fromAccountNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_Account1">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountNo" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="toAccountNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="addCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="custName" Type="varchar" Mode="In" />
+    <Parameter Name="gender" Type="varchar" Mode="In" />
+    <Parameter Name="dob" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="state" Type="varchar" Mode="In" />
+    <Parameter Name="city" Type="varchar" Mode="In" />
+    <Parameter Name="pincode" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="createdDate" Type="varchar" Mode="In" />
+    <Parameter Name="editedDate" Type="varchar" Mode="In" />
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+    <Parameter Name="branchId" Type="varchar" Mode="In" />
+    <Parameter Name="managerId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="addDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="customerId" Type="int" Mode="In" />
+    <Parameter Name="accounttype" Type="varchar" Mode="In" />
+    <Parameter Name="DateOfOpen" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="dateOfEdited" Type="varchar" Mode="In" />
+    <Parameter Name="ClosingDate" Type="varchar" Mode="In" />
+    <Parameter Name="amount" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="addLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="role" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="addManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="managerName" Type="varchar" Mode="In" />
+    <Parameter Name="branchId" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="balanceEnq" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="changeMedal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="amt" Type="int" Mode="In" />
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="changePass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="checkAcc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="checkAmo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="checkCre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="checkCust" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="customerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="checkMedal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="amt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="datecheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+    <Parameter Name="start" Type="varchar" Mode="In" />
+    <Parameter Name="end" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="deleteCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="custId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="accountNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="managerId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="deposit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+    <Parameter Name="amt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="editedDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="accountNo" Type="bigint" Mode="In" />
+    <Parameter Name="accounttype" Type="varchar" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="dateOfEdited" Type="varchar" Mode="In" />
+    <Parameter Name="ClosingDate" Type="varchar" Mode="In" />
+    <Parameter Name="amount" Type="int" Mode="In" />
+  </Function>
+  <Function Name="editManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="managerId" Type="int" Mode="In" />
+    <Parameter Name="managerName" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+    <Parameter Name="emailId" Type="varchar" Mode="In" />
+    <Parameter Name="branchId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getAllCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getCustomerName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getMedal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="getSpecificCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="custId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="insTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc1" Type="bigint" Mode="In" />
+    <Parameter Name="acc2" Type="bigint" Mode="In" />
+    <Parameter Name="amt" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="comment" Type="varchar" Mode="In" />
+    <Parameter Name="Date" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ministategen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="prints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="transferAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="amt" Type="int" Mode="In" />
+    <Parameter Name="acc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="transferSub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="amt" Type="int" Mode="In" />
+    <Parameter Name="acc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="custId" Type="int" Mode="In" />
+    <Parameter Name="custName" Type="varchar" Mode="In" />
+    <Parameter Name="gender" Type="varchar" Mode="In" />
+    <Parameter Name="dob" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="state" Type="varchar" Mode="In" />
+    <Parameter Name="city" Type="varchar" Mode="In" />
+    <Parameter Name="pincode" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+    <Parameter Name="editedDate" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updatePass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="newuserId" Type="varchar" Mode="In" />
+    <Parameter Name="olduserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="withdraw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acc" Type="bigint" Mode="In" />
+    <Parameter Name="amt" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BankModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerMedal" EntityType="Self.CustomerMedal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_CustomerMedal" Association="Self.FK_Account_CustomerMedal">
+      <End Role="CustomerMedal" EntitySet="CustomerMedal" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Manager" Association="Self.FK_Customer_Manager">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Branch" Association="Self.FK_Manager_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Login" Association="Self.FK_Manager_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_Account" Association="Self.FK_Transaction_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_Account1" Association="Self.FK_Transaction_Account1">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

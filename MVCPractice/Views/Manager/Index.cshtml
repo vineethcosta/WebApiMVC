@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BusinessLayer.Customer>
+
+@{
+    ViewBag.Title = "Index";
+
+
+}
+
+
+@using (Html.BeginForm())
+{
+    <h2>Customers Data</h2>
+    <div class="jumbotron d-inline-block" style=" margin-top: 100px">
+        <div class="table-responsive">
+
+            <div>
+
+                <table border="1" style="font-family:Arial" class="table table-hover table-striped">
+                    <tr>
+                   
+                        <th>CustomerId</th>
+                        <th>CustomerName</th>
+                        <th>Gender</th>
+                        <th>Date Of Birth</th>
+                        <th>Address</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Pincode</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Branch</th>
+                    </tr>
+
+                    @foreach (BusinessLayer.Customer customer in @Model)
+                    {
+                        <tr>
+                            
+                            <td>
+                                @customer.customerId
+                            </td>
+                            <td>
+                                @customer.customerName
+                            </td>
+                            <td>
+                                @customer.gender
+                            </td>
+                            <td>
+                                @customer.dob
+                            </td>
+                            <td>
+                                @customer.address
+                            </td>
+                            <td>
+                                @customer.state
+                            </td>
+                            <td>
+                                @customer.city
+                            </td>
+                            <td>
+                                @customer.pincode
+                            </td>
+                            <td>
+                                @customer.phoneNo
+                            </td>
+                            <td>
+                                @customer.email
+                            </td>
+                            <td>
+                                @customer.branchId
+                            </td>
+                        </tr>
+
+                    }
+
+                </table>
+                <br />
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+

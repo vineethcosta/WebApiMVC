@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="accountNo" />
+    </Key>
+    <Property Name="accountNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="accountType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfOpen" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateOfEdited" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ClosingDate" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="amount" Type="Int32" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Account_Customer" FromRole="Account" ToRole="Customer" />
+    <NavigationProperty Name="CustomerMedal" Relationship="Self.FK_Account_CustomerMedal" FromRole="Account" ToRole="CustomerMedal" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK_Transaction_Account" FromRole="Account" ToRole="Transaction" />
+    <NavigationProperty Name="Transactions1" Relationship="Self.FK_Transaction_Account1" FromRole="Account" ToRole="Transaction" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="branchId" />
+    </Key>
+    <Property Name="branchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branchId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="assigned" Type="Int32" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Customer" FromRole="Branch" ToRole="Customer" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Branch" FromRole="Branch" ToRole="Manager" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dob" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phoneNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="createdDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="editedDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="branchId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="managerId" Type="Int32" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Customer" FromRole="Customer" ToRole="Account" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Customer_Customer" FromRole="Customer" ToRole="Branch" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK_Customer_Manager" FromRole="Customer" ToRole="Manager" />
+  </EntityType>
+  <EntityType Name="CustomerMedal">
+    <Key>
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="min" Type="Int32" />
+    <Property Name="max" Type="Int32" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_CustomerMedal" FromRole="CustomerMedal" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Login" FromRole="Login" ToRole="Manager" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="managerId" />
+    </Key>
+    <Property Name="managerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branchId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Manager_Branch" FromRole="Manager" ToRole="Branch" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Manager" FromRole="Manager" ToRole="Customer" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Manager_Login" FromRole="Manager" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="transactionId" />
+    </Key>
+    <Property Name="transactionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fromAccountNo" Type="Int64" Nullable="false" />
+    <Property Name="toAccountNo" Type="Int64" Nullable="false" />
+    <Property Name="transactionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="transactionType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="comments" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
+    <NavigationProperty Name="Account1" Relationship="Self.FK_Transaction_Account1" FromRole="Transaction" ToRole="Account" />
+  </EntityType>
+  <Association Name="FK_Account_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_CustomerMedal">
+    <End Role="CustomerMedal" Type="Self.CustomerMedal" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerMedal">
+        <PropertyRef Name="type" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountNo" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="fromAccountNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_Account1">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountNo" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="toAccountNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Customer">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="branchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchId" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="branchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Manager">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="managerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Branches" EntityType="Self.Branch" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerMedals" EntityType="Self.CustomerMedal" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
+    <EntitySet Name="Managers" EntityType="Self.Manager" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_CustomerMedal" Association="Self.FK_Account_CustomerMedal">
+      <End Role="CustomerMedal" EntitySet="CustomerMedals" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_Account" Association="Self.FK_Transaction_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_Account1" Association="Self.FK_Transaction_Account1">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Branch" Association="Self.FK_Manager_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Manager" Association="Self.FK_Customer_Manager">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Login" Association="Self.FK_Manager_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <FunctionImport Name="addCustomer">
+      <Parameter Name="custName" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="state" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="pincode" Mode="In" Type="String" />
+      <Parameter Name="phoneNo" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="createdDate" Mode="In" Type="String" />
+      <Parameter Name="editedDate" Mode="In" Type="String" />
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="branchId" Mode="In" Type="String" />
+      <Parameter Name="managerId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="addDetails">
+      <Parameter Name="customerId" Mode="In" Type="Int32" />
+      <Parameter Name="accounttype" Mode="In" Type="String" />
+      <Parameter Name="DateOfOpen" Mode="In" Type="String" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="dateOfEdited" Mode="In" Type="String" />
+      <Parameter Name="ClosingDate" Mode="In" Type="String" />
+      <Parameter Name="amount" Mode="In" Type="Int32" />
+      <Parameter Name="type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="addLogin">
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="role" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="addManager">
+      <Parameter Name="managerName" Mode="In" Type="String" />
+      <Parameter Name="branchId" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="phoneNo" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="balanceEnq" ReturnType="Collection(Int32)">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="changeMedal">
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="changePass" ReturnType="Collection(String)">
+      <Parameter Name="uid" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="checkAcc" ReturnType="Collection(Int32)">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="checkAmo" ReturnType="Collection(Int32)">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="checkCre" ReturnType="Collection(BankModel.checkCre_Result)">
+      <Parameter Name="uid" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="checkCust" ReturnType="Collection(String)">
+      <Parameter Name="customerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="checkMedal" ReturnType="Collection(String)">
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="datecheck" ReturnType="Collection(BankModel.datecheck_Result)">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+      <Parameter Name="start" Mode="In" Type="String" />
+      <Parameter Name="end" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="deleteCustomer">
+      <Parameter Name="custId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteDetails">
+      <Parameter Name="accountNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteManager">
+      <Parameter Name="managerId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="deposit">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="editedDetails">
+      <Parameter Name="accountNo" Mode="In" Type="Int64" />
+      <Parameter Name="accounttype" Mode="In" Type="String" />
+      <Parameter Name="type" Mode="In" Type="String" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="dateOfEdited" Mode="In" Type="String" />
+      <Parameter Name="ClosingDate" Mode="In" Type="String" />
+      <Parameter Name="amount" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="editManager">
+      <Parameter Name="managerId" Mode="In" Type="Int32" />
+      <Parameter Name="managerName" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="phoneNo" Mode="In" Type="String" />
+      <Parameter Name="emailId" Mode="In" Type="String" />
+      <Parameter Name="branchId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getAllCustomers" ReturnType="Collection(BankModel.getAllCustomers_Result)" />
+    <FunctionImport Name="getBranch" ReturnType="Collection(String)">
+      <Parameter Name="userId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getCustomerName" ReturnType="Collection(String)">
+      <Parameter Name="uid" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getMedal" ReturnType="Collection(String)">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="getSpecificCustomer" ReturnType="Collection(BankModel.getSpecificCustomer_Result)">
+      <Parameter Name="custId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="insTrans">
+      <Parameter Name="acc1" Mode="In" Type="Int64" />
+      <Parameter Name="acc2" Mode="In" Type="Int64" />
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+      <Parameter Name="type" Mode="In" Type="String" />
+      <Parameter Name="comment" Mode="In" Type="String" />
+      <Parameter Name="Date" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ministategen" ReturnType="Collection(BankModel.ministategen_Result)">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="prints" ReturnType="Collection(BankModel.prints_Result)">
+      <Parameter Name="id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="transferAdd">
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+      <Parameter Name="acc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="transferSub">
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+      <Parameter Name="acc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="updateCustomer">
+      <Parameter Name="custId" Mode="In" Type="Int32" />
+      <Parameter Name="custName" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="state" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="pincode" Mode="In" Type="String" />
+      <Parameter Name="phoneNo" Mode="In" Type="String" />
+      <Parameter Name="editedDate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="updatePass">
+      <Parameter Name="uid" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="updateUserID">
+      <Parameter Name="newuserId" Mode="In" Type="String" />
+      <Parameter Name="olduserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="withdraw">
+      <Parameter Name="acc" Mode="In" Type="Int64" />
+      <Parameter Name="amt" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="checkCre_Result">
+    <Property Type="String" Name="password" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="role" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="datecheck_Result">
+    <Property Type="Int64" Name="transactionId" Nullable="false" />
+    <Property Type="Int64" Name="fromAccountNo" Nullable="false" />
+    <Property Type="Int64" Name="toAccountNo" Nullable="false" />
+    <Property Type="String" Name="transactionDate" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="amount" Nullable="false" />
+    <Property Type="String" Name="transactionType" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="comments" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getAllCustomers_Result">
+    <Property Type="Int32" Name="customerId" Nullable="false" />
+    <Property Type="String" Name="customerName" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="gender" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="dob" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="address" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="state" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="city" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="pincode" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="phoneNo" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="createdDate" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="editedDate" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="userId" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="branchId" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="managerId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getSpecificCustomer_Result">
+    <Property Type="Int32" Name="customerId" Nullable="false" />
+    <Property Type="String" Name="customerName" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="gender" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="dob" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="address" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="state" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="city" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="pincode" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="phoneNo" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="createdDate" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="editedDate" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="userId" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="branchId" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="managerId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ministategen_Result">
+    <Property Type="Int64" Name="transactionId" Nullable="false" />
+    <Property Type="Int64" Name="fromAccountNo" Nullable="false" />
+    <Property Type="Int64" Name="toAccountNo" Nullable="false" />
+    <Property Type="String" Name="transactionDate" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="amount" Nullable="false" />
+    <Property Type="String" Name="transactionType" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="comments" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="prints_Result">
+    <Property Type="Int64" Name="accountNo" Nullable="false" />
+    <Property Type="String" Name="accountType" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="status" Nullable="false" MaxLength="10" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,76 @@
+﻿@model  IEnumerable<BusinessLayer.Account>
+@{
+    ViewBag.Title = "Account";
+}
+<label>@ViewBag.msg</label>
+
+@using (Html.BeginForm("Account", "Manager"))
+{
+    <div class="jumbotron bg-light text-dark" style=" margin-top: 100px">
+        <div>
+            <h2><label id="Label1">Account</label></h2>
+        </div>
+        <div class="form-group">
+            <label id="Label1" class="col-form-label">Customer Id</label>
+            <input type="text" name="customerId" id="customerId" class="form-control" />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-outline-success" value="submit" />
+        </div>
+            <label></label>
+    </div>
+
+}
+@*@if (Model != null)
+{
+    using (Html.BeginForm("editAccount", "Manager"))
+    {
+        <div class="jumbotron bg-light text-dark" style=" margin-top: 100px">
+
+            <table border="2" id="Table" style="font-family:Arial" class="table table-hover table-striped">
+                <tr>
+                    <th> </th>
+                    <th>AccountNumber</th>
+                    <th>AccountType</th>
+                    <th>Status</th>
+                </tr>
+
+                @foreach (BusinessLayer.Account accounts in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.RadioButton("selectedAccount", accounts.accountNo)
+                        </td>
+                        <td>
+                            @accounts.accountNo
+
+                        </td>
+                        <td>
+                            @accounts.accountType
+                        </td>
+                        <td>
+                            @accounts.status
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+            <div class="btn-group">
+                <input type="submit" value="Add" id="AddButton" onclick="location.href='@Url.Action("addAccount", "Manager")'" class="btn btn-outline-success" />
+                <input type="submit" value="Edit" id="EditButton" class="btn btn-outline-secondary" />
+            </div>
+
+            <Button ID="DeleteButton"  OnClick="DeleteButton_Click" Class="btn btn-outline-danger" >Delete</Button>
+                </div>
+                <Button ID="DeleteAccountButton"  OnClick="DeleteAccountButton_Click" Class="btn btn-outline-danger" >Click to confirm Deletion</Button>
+
+            <label id="Label3"></label>
+        </div>
+
+    }
+}*@
+
+
+
+        

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "DeleteManager";
+}
+@using (Html.BeginForm())
+{ 
+<div class="jumbotron bg-light text-dark">
+    <div>
+        <h1><label id="Label1">Delete Manager with Id = @ViewBag.mgrId ?</label></h1>
+
+        <div class="btn btn-group">
+            <input type="submit" class="btn btn-outline-success" value="YES" />
+            <input type="submit" onclick="location.href='@Url.Action("index","SuperManager")'" class="btn btn-outline-daner" value="NO" />
+        </div>
+    </div>
+</div>
+}

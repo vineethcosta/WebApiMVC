@@ -1,0 +1,75 @@
+﻿@using MVCPractice.Models
+
+@model BusinessLayer.Customer
+
+@{
+    ViewBag.Title = "EditCustomer";
+}
+
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+@using (Html.BeginForm())
+{
+    <div class="jumbotron bg-light text-dark">
+        <div>
+            <label><h2>Edit Customer</h2></label>
+        </div>
+        <asp:Label ID="Label2" runat="server" Class="alert-info">@ViewBag.Error @ViewBag.Success</asp:Label>
+        <div class="input-group">
+            <label for="custName1" id="nameLabel" class="col-form-label input-text-prepend">Name&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="form-control" name="customerName" id="customerName" />
+            @*@Html.EditorFor(model => model.customerName)*@
+        </div>
+        <div class="input-group">
+            <label id="genderLabel" class="col-form-label input-text-prepend">Gender&nbsp;&nbsp;</label>
+            <div class="form-control">
+                Male
+                @Html.RadioButtonFor(model => model.gender, "M")
+                Female
+                @Html.RadioButtonFor(model => model.gender, "F")
+
+            </div>
+        </div>
+        <div class="input-group">
+            <asp:label id="dobLabel" class="col-form-label input-text-prepend">DOB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:label>
+            <input type="text" name="dob" id="dob" class="form-control date-picker"  />
+            @*@Html.TextBox("dob", "", new { @class = "date-picker" })*@
+        </div>
+        <div class="input-group">
+            <label id="addressLabel" class="col-form-label input-text-prepend">Address&nbsp;&nbsp;</label>
+            <input type="text" name="address" id="address" class="form-control"/>
+            @*@Html.EditorFor(model => model.address)*@
+        </div>
+        <div class="input-group">
+            <label id="stateLabel" class="col-form-label input-text-prepend">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            @Html.DropDownList("state",
+                    new SelectList(Enum.GetValues(typeof(states))),
+                    "Select State",
+                    new { @class = "form-control" })
+        </div>
+        <div class="input-group">
+            <asp:label id="cityLabel" class="col-form-label input-text-prepend">City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:label>
+            <input type="text" name="city" id="city" class="form-control" />
+            @*@Html.EditorFor(model => model.city)*@
+        </div>
+        <div class="input-group">
+            <label id="pincodeLabel" class="col-form-label input-text-prepend">Pincode&nbsp;&nbsp;</label>
+            <input type="text" name="pincode" id="pincode" class="form-control" />
+            @*@Html.EditorFor(model => model.pincode)*@
+        </div>
+        <div class="input-group mb-3">
+            <label id="phoneNumberLabel" class="col-form-label input-text-prepend">Phone Number</label>
+            <input type="text" name="phoneNo" id="phoneNo" class="form-control" />
+            @*@Html.EditorFor(model => model.phoneNo)*@
+        </div>
+
+        <div>
+            <button id="addCustomerBtn" class="btn btn-outline-dark" type="submit">Submit</button>
+        </div>
+    </div>
+}
+

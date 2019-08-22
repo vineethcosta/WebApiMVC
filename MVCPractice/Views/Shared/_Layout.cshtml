@@ -1,0 +1,245 @@
+﻿@{
+
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*<link href="~/Scripts/CSS/bootstrap-theme.css" rel="stylesheet" />*@
+    <link href="~/Scripts/CSS/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Scripts/CSS/site.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log(Session["role"]);
+            @if (Session["role"] == null) {
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="Navbar">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav" style="margin:0;padding:0;height:80px;">
+
+            <a class="navbar-brand"><h3 style="color:#ffffff">Banking Application</h3></a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        @if (ViewContext.RouteData.Values["Controller"].ToString() != "Login")
+                        {
+                            <button type="button" id="homeBtn" onclick="location.href='@Url.Action("Index", "Login")'" class="btn btn-outline-light  pull-right">Home</button>
+                        }
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item pull-right">
+    @if (Session["role"] != null)
+                        {
+        <a class="navbar-brand"><h4 style="color:#ffffff">Welcome @Session["userId"] !</h4></a>
+                        }
+    @if (Session["accountNumber"] != null)
+                        {
+                            string input = @Session["accountNumber"].ToString();
+                            var result = "XXXXXXX" + input.Substring(input.Length - 3);
+                            <a class="navbar-brand">
+        <h4 style="color:#ffffff">
+            @result
+        </h4>
+    </a>
+}
+    @if (Session["medal"] != null && Session["accountNumber"] != null)
+                        {
+                            var medal = Session["medal"].ToString() + ".jfif";
+        <img src="~/Images/@medal" alt="Sample Photo" />
+                        }
+    <label id="HeaderName" style="color:#ffffff"></label>
+    <label id="HeaderAccountNo" style="color:#ffffff"></label>
+                   
+                        @if (Session["role"] != null)
+                        {<a class="navbar-brand"><button type="button" id="changePasswordBtn" onclick="location.href='@Url.Action("ChangePassword", "Customer")'" class="btn btn-outline-light ">ChangePassword </button><text>&nbsp;</text></a>
+                        }
+                   
+                    
+                        @if (ViewContext.RouteData.Values["Controller"].ToString() != "Login")
+                        {
+                          <a class="navbar-brand">  <input type="button" value="Logout" id="logoutBtn" onclick="location.href='@Url.Action("Logout", "Login")'" class="btn btn-outline-light" /></a>
+                        }
+                   
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="container" class="row no-gutters">
+        <div class="col-md-2 no-gutters">
+            <div class="leftside bg-dark" style="height: 100vh;width:100%">
+                <div class="btn-group-vertical" style="padding-left:25px;">
+                    @if (Session["role"] == "Manager")
+                    {
+                        <button type="button" id="fundTransferBtn" onclick="location.href='@Url.Action("Withdraw","Manager")'" class="btn btn-info ">Withdraw</button><br />
+    <button type="button" id="miniStatementBtn" onclick="location.href='@Url.Action("Deposit", "Manager")'" class="btn btn-info ">Deposit</button><br />
+    <button type="button" id="changePasswordBtn" onclick="location.href='@Url.Action("ManageCustomer", "Manager")'" class="btn btn-info ">Customer </button><br />
+    <button type="button" id="balanceEnquiryBtn" onclick="location.href='@Url.Action("Account", "Manager")'" class="btn btn-info ">Account</button><br />
+                    }
+                    else if (Session["role"] == "Customer" && Session["accountNumber"] != null)
+                    {
+                        <button type="button" id="fundTransferBtn" onclick="location.href='@Url.Action("FundTransfer","Customer")'" class="btn btn-info ">Fund Transfer</button><br />
+    <button type="button" id="miniStatementBtn" onclick="location.href='@Url.Action("MiniStatement", "Customer")'" class="btn btn-info ">MiniStatement</button><br />
+                    }
+                    else if (Session["role"] == "BankManager")
+                    {
+                        <button type="button" id="Managers" onclick="location.href='@Url.Action("ManageManager","SuperManager")'" class="btn btn-info ">Managers</button><br />
+                    }
+                    else
+                    {
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 no-gutters">
+            <div class="rightside d-flex justify-content-center align-items-center" style="height:100vh; width: 100%; background-color: #c2bcbc;   ">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer bg-dark no-gutters" style="">
+    </div>
+</body>
+</html>
+
+@{
+
+}
+
+@*<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <link href="~/Scripts/CSS/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Scripts/CSS/bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/CSS/site.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" id="nav" style="margin:0;padding:0;height:80px;">
+        <div class="container-fluid" style="margin:0px;">
+            <div class="navbar-header">
+                <a class="navbar-brand"><h3 style="color:#ffffff">Banking Application</h3></a>
+                @if (ViewContext.RouteData.Values["Controller"].ToString() != "Login")
+                {
+                    <button type="button" id="homeBtn" onclick="location.href='@Url.Action("Index", "Login")'" class="btn btn-outline-light  pull-right">Home</button>
+                }
+
+            </div>
+
+            <ul class="nav navbar-nav navbar-right pull-right">
+                <li class="nav-item pull-right">
+                    @if (Session["role"] != null)
+                    {
+                        <a class="navbar-brand"><h4 style="color:#ffffff">Welcome @Session["userId"] !</h4></a>
+
+                    }
+
+                    @if (Session["accountNumber"] != null)
+                    {
+                        string input = @Session["accountNumber"].ToString();
+                        var result = "XXXXXXX" + input.Substring(input.Length - 3);
+                        <a class="navbar-brand">
+                            <h4 style="color:#ffffff">
+                                @result
+                            </h4>
+                        </a>
+
+                    }
+                    @if (Session["medal"] != null && Session["accountNumber"] != null)
+                    {
+                        var medal = Session["medal"].ToString() + ".jfif";
+                        <img src="~/Images/@medal" alt="Sample Photo" />
+
+                    }
+
+                    <label id="HeaderName" style="color:#ffffff"></label>
+                    <label id="HeaderAccountNo" style="color:#ffffff"></label>
+                    @if (Session["role"] != null)
+                    {<a class="navbar-brand"><button type="button" id="changePasswordBtn" onclick="location.href='@Url.Action("ChangePassword", "Customer")'" class="btn btn-outline-light ">ChangePassword </button><text>&nbsp;</text></a>
+                    }
+
+
+                    @if (ViewContext.RouteData.Values["Controller"].ToString() != "Login")
+                    {
+                        <a class="navbar-brand">  <input type="button" value="Logout" id="logoutBtn" onclick="location.href='@Url.Action("Logout", "Login")'" class="btn btn-outline-light" /></a>
+                    }
+                   
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row" style="padding:0;">
+        <div class="col-md-2 bg-dark" style="width:auto;height:1000px;">
+
+            <div class="btn-group-vertical" style="padding-left:25px;">
+                <br />
+                @if (Session["role"] == "Manager")
+                {
+
+
+                    <button type="button" id="fundTransferBtn" onclick="location.href='@Url.Action("Withdraw","Manager")'" class="btn btn-info ">Withdraw</button><br />
+                    <button type="button" id="miniStatementBtn" onclick="location.href='@Url.Action("Deposit", "Manager")'" class="btn btn-info ">Deposit</button><br />
+                    <button type="button" id="changePasswordBtn" onclick="location.href='@Url.Action("ManageCustomer", "Manager")'" class="btn btn-info ">Customer </button><br />
+                    <button type="button" id="balanceEnquiryBtn" onclick="location.href='@Url.Action("Account", "Manager")'" class="btn btn-info ">Account</button><br />
+
+                }
+                else if (Session["role"] == "Customer" && Session["accountNumber"] != null)
+                {
+
+                      <button type="button" id="fundTransferBtn" onclick="location.href='@Url.Action("FundTransfer","Customer")'" class="btn btn-info ">Fund Transfer</button><br />
+    <button type="button" id="miniStatementBtn" onclick="location.href='@Url.Action("MiniStatement", "Customer")'" class="btn btn-info ">MiniStatement</button><br />
+
+
+
+                }
+                else if (Session["role"] == "BankManager")
+                {
+
+                    <button type="button" id="Managers" onclick="location.href='@Url.Action("ManageManager","SuperManager")'" class="btn btn-info ">Managers</button><br />
+                }
+                else
+                {
+
+                }
+            </div>
+        </div>
+        <div class="col-md-10 justify-content-around" style="background-color:#c2bcbc; width:100%;  text-align: center;">
+            @RenderBody()
+        </div>
+    </div>
+
+    <div class="modal-footer bg-dark" style="">
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log(Session["role"]);
+            @if (Session["role"] == null) {
+
+            }
+
+
+
+        });
+    </script>
+
+</body>
+</html>*@

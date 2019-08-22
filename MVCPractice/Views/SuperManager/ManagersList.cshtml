@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "ManagersList";
+}
+
+
+@model  IEnumerable<MVCPractice.Models.userDetailViewModel>
+
+
+@{
+    ViewBag.Title = "Managers";
+}
+<div class="jumbotron bg-light text-dark">
+    <h2><label>Managers List</label></h2>
+    <label id="message"></label>
+    <div class="table-responsive">
+        <div>
+
+            <table border="1" style="font-family:Arial" class="table table-hover table-striped">
+                <tr>
+                    <th>Manager Id</th>
+                    <th>Manager Name</th>
+                    <th>Branch Id</th>
+                </tr>
+
+                @foreach (MVCPractice.Models.userDetailViewModel manager in @Model)
+                {
+                    <tr>
+
+                        <td>
+                            @manager.userId
+                        </td>
+                        <td>
+                           @manager.userName
+
+                        </td>
+                        <td>
+                           @manager.branchId
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+            <br />
+        </div>
+    </div>
+    <button id="add" onclick="location.href='@Url.Action("addManager","SuperManager")'" class="btn btn-outline-success">Add</button>
+    <button id="back" onclick="location.href='@Url.Action("ManageManager","SuperManager")'" class="btn btn-outline-success">Back</button>
+</div>

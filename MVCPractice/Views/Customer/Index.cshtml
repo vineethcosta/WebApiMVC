@@ -1,0 +1,54 @@
+﻿
+@model  IEnumerable<MVCPractice.Models.accountDetailViewModel>
+
+
+
+
+
+
+   <div class="jumbotron d-inline-block" style=" margin-top: 100px">
+    <div>
+        <h1>  <label id="Role" text="Label"></label></h1>
+    </div>
+    <div class="table-responsive">
+        @using (Html.BeginForm())
+        {
+            <div>
+
+                <table border="2" style="font-family:Arial" class="table table-hover table-striped">
+                    <tr>
+                        <th> </th>
+                        <th>AccountNumber</th>
+                        <th>AccountType</th>
+                        <th>Status</th>
+                    </tr>
+
+                    @foreach (MVCPractice.Models.accountDetailViewModel account in @Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.RadioButton("selectedAccount", account.accountNumber)
+                            </td>
+                            <td>
+                                @account.accountNumber
+
+                            </td>
+                            <td>
+                                @account.accountType
+                            </td>
+                            <td>
+                                @account.accountStatus
+                            </td>
+                        </tr>
+
+
+
+                    }
+
+                </table>
+                <br />
+                <input type="submit" class="btn btn-outline-secondary" value="submit" />
+            </div>
+        }
+    </div>
+</div>

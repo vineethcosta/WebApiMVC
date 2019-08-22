@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "addAccount";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="jumbotron bg-light text-dark" style=" margin-top: 100px">
+        <div>
+            <h1><label id="Label1">Add Account</label></h1>
+        </div>
+        <div class="form-group">
+            <label id="AccountTypeLabel" class="col-form-label">Account Type</label>
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Current Account",
+                    Value = "Current"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Savings Account",
+                    Value = "Savings",
+                    Selected = true
+                });
+            }
+            @Html.DropDownList("AccountType", listItems, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label id="DateOfOpeneningLabel" class="col-form-label">Date Of Opening</label>
+            @{
+                Session["Today"] = DateTime.Now;
+            }
+            <label class="form-control">@Session["Today"]</label>
+        </div>
+        <div class="form-group">
+            <label id="StatusLabel" class="col-form-label">Status</label>
+            @{
+                List<SelectListItem> listItems2 = new List<SelectListItem>();
+                listItems2.Add(new SelectListItem
+                {
+                    Text = "Open",
+                    Value = "Open"
+                });
+                listItems2.Add(new SelectListItem
+                {
+                    Text = "Close",
+                    Value = "Close",
+                    Selected = true
+                });
+            }
+            @Html.DropDownList("Status", listItems2, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label id="DateOfEditedLabel" class="col-form-label">DateOfEdited</label>
+            @{
+                Session["Today"] = DateTime.Now;
+            }
+            <label class="form-control">@Session["Today"]</label>
+
+        </div>
+        <div class="form-group">
+            <label id="ClosingDateLabel" class="col-form-label">ClosingDate</label>
+            <input type="text" class="form-control" id="ClosingDateTextBox" name="ClosingDateTextBox"/>
+        </div>
+        <div class="form-group">
+            <label id="AmountLabel" class="col-form-label">Amount</label>
+            <input type="text" class="form-control" id="AmountTextBox" name="AmountTextBox" />
+        </div>
+        <div>
+            <button id="DetailsSubmitButton" onclick="location.href='@Url.Action("Account", "Manager")'" class="btn btn-outline-secondary">Submit Details</button>
+        </div>
+    </div>
+}
